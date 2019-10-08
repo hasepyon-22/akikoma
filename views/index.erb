@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<meta charset="UTF-8">
+	<title>ホーム</title>
+</head>
+<body>
+	<div class="container">
+		<div class="row">
+
+
+			<div class="col-lg-6">
+				<h2>空きコマ</h2>
+					<ul>
+						<% @friends.each do |friend| %>
+							<%= friend.friend.name %>
+						<% end %>
+					</ul>
+
+			</div>
+
+			<div class="col-lg-6">
+				<h2>マイ時間割</h2>
+
+					<table class="table-bordered">
+						<tr>
+							<th></th>
+							<th>Mon</th>
+							<th>Tue</th>
+							<th>Wed</th>
+							<th>Thu</th>
+							<th>Fri</th>
+						</tr>
+
+						<tr>
+							<th>1</th>
+							<td><%= @mon1&.day %></td>
+							<td><%= @tue1&.day %></td>
+							<td><%= @wed1&.day %></td>
+							<td><%= @thu1&.day %></td>
+							<td><%= @fri1&.day %></td>
+						</tr>
+
+						<tr>
+							<th>2</th>
+							<td><%= @mon2&.day %></td>
+							<td><%= @tue2&.day %></td>
+							<td><%= @wed2&.day %></td>
+							<td><%= @thu2&.day %></td>
+							<td><%= @fri2&.day %></td>
+						</tr>
+
+						<tr>
+							<th>3</th>
+							<td><%= @mon3&.day %></td>
+							<td><%= @tue3&.day %></td>
+							<td><%= @wed3&.day %></td>
+							<td><%= @thu3&.day %></td>
+							<td><%= @fri3&.day %></td>
+						</tr>
+
+						<tr>
+							<th>4</th>
+							<td><%= @mon4&.day %></td>
+							<td><%= @tue4&.day %></td>
+							<td><%= @wed4&.day %></td>
+							<td><%= @thu4&.day %></td>
+							<td><%= @fri4&.day %></td>
+						</tr>
+
+						<tr>
+							<th>5</th>
+							<td><%= @mon5&.day %></td>
+							<td><%= @tue5&.day %></td>
+							<td><%= @wed5&.day %></td>
+							<td><%= @thu5&.day %></td>
+							<td><%= @fri5&.day %></td>
+						</tr>
+
+						<tr>
+							<th>6</th>
+							<td><%= @mon6&.day %></td>
+							<td><%= @tue6&.day %></td>
+							<td><%= @wed6&.day %></td>
+							<td><%= @thu6&.day %></td>
+							<td><%= @fri6&.day %></td>
+						</tr>
+
+					</table>
+
+
+
+			</div>
+
+
+		</div>
+
+
+
+
+	</div>
+
+
+
+
+
+
+
+
+</body>
+</html>

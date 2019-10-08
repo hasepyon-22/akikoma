@@ -1,0 +1,22 @@
+<h1>友達検索</h1>
+
+<form action="/search" method="post">
+  <input type="text" id="search-name" name="name" placeholder="ユーザーネーム">
+  <input type="submit" value="検索">
+</form>
+
+<% if @user %>
+
+  <p>
+    <%= @user.name %>
+    <% if Friendship.find_by(user_id: current_user.id, friend_id: @user.id) %>
+      <span>追加済み</span>
+    <% else %>
+    <form action="/add/<%= @user.id %>" method="post">
+      <input type="submit" value="追加">
+    </form>
+    <% end %>
+
+  </p>
+
+<% end %>
