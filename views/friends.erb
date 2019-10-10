@@ -1,8 +1,19 @@
-<h1>友達</h1>
-<ul>
-  <ul>
-			<% @friends.each do |friend| %>
-			<a href="/friends/<%= friend.friend.id %>"><li><%= friend.friend.name %></li></a>
-			<% end %>
-		</ul>
-</ul>
+<div class="container">
+
+  <h1>友達</h1>
+
+
+
+
+
+  <div class="list-groups">
+      <% @friends.each do |friend| %>
+
+        <a href="/friends/<%= friend.friend.id %>" class="list-group-item list-group-item-action"><%= friend.friend.name %></a>
+
+
+
+      <% end %>
+  </div>
+
+</div>

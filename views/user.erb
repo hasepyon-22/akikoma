@@ -1,6 +1,14 @@
-<h2><%= @user.name %>の時間割</h2>
+<div class="container">
+	<div class="row justify-content-center mt-5">
+		<img class="rounded-circle" src="<%= @user.img %>" style="width: 150px;">
+	</div>
 
-<table>
+	<div class="row justify-content-center mt-4 border-bottom">
+		<h2><%= @user.name %></h2>
+	</div>
+
+	<div class="row justify-content-center mt-5">
+		<table>
 			<tr>
 				<th></th>
 				<th>Mon</th>
@@ -64,4 +72,10 @@
 				<td><%= @fri6&.day %></td>
 			</tr>
 
-		</table>
+	</table>
+
+	</div>
+
+
+
+</div>

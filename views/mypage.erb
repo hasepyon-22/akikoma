@@ -1,4 +1,14 @@
-<table>
+<div class="container">
+	<div class="row justify-content-center mt-5">
+		<img class="rounded-circle" src="<%= current_user.img %>" style="width: 150px;">
+	</div>
+
+	<div class="row justify-content-center mt-4 border-bottom">
+		<h2><%= current_user.name %></h2>
+	</div>
+
+	<div class="row justify-content-center mt-5">
+		<table>
 			<tr>
 				<th></th>
 				<th>Mon</th>
@@ -64,4 +74,12 @@
 
 		</table>
 
+
+
+	</div>
+
     <a href="/register">編集</a>
+
+
+
+</div>

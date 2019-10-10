@@ -1,6 +1,9 @@
-<form action="/signup" method="post">
-  <input type="text" name="name" placeholder="username"><br>
-  <input type="password" name="password" placeholder="password"><br>
-  <input type="password" name="password_confirmation" placeholder="password">
-  <input type="submit" value="新規登録">
-</form>
+<div class="container">
+  <form action="/signup" method="post" enctype="multipart/form-data">
+    <input class="form-control" type="text" name="name" placeholder="username"><br>
+    <input class="form-control" type="password" name="password" placeholder="password"><br>
+    <input class="form-control" type="password" name="password_confirmation" placeholder="password"><br>
+    <input class="form-control-file" type="file" name="file"><br>
+    <button type="submit" class="btn btn-success btn-block">新規登録</button>
+  </form>
+</div>

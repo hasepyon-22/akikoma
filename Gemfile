@@ -14,6 +14,11 @@ gem 'rake'
 gem 'nokogiri'
 gem 'mechanize'
 
+gem 'tzinfo-data'
+
+gem 'dotenv'
+gem 'cloudinary'
+
 group :development do
   gem 'sqlite3', '1.4.1'
 end

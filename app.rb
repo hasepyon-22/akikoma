@@ -4,15 +4,18 @@ require 'sinatra/reloader' if development?
 
 require './models'
 
-require 'nokogiri'
+# require 'nokogiri'
 require 'open-uri'
 require 'csv'
 require "pp"
 require 'kconv'
 require 'net/http'
-require 'pry'
+# require 'pry'
 
 require 'date'
+
+# require 'dotenv'
+# require 'cloudinary'
 
 
 enable :sessions
@@ -54,9 +57,27 @@ helpers do
   def current_user
     User.find_by(id: session[:user])
   end
+
+  def friended_users
+    friendships = Friendship.where(user_id: current_user.id)
+    friends = []
+    friendships.each do |friendship|
+      if Friendship.find_by(user_id: friendship.friend.id, friend_id: current_user.id)
+        friends << friendship.friend
+      end
+    end
+    friends
+  end
 end
 
 before do
+  Dotenv.load
+  Cloudinary.config do |config|
+    config.cloud_name = ENV['CLOUD_NAME']
+    config.api_key = ENV['CLOUDINARY_API_KEY']
+    config.api_secret = ENV['CLOUDINARY_API_SECRET']
+  end
+
   if !current_user && request.path_info != "/signin" && request.path_info != "/signup"
     redirect '/signin'
   end
@@ -98,7 +119,15 @@ get '/signup' do
 end
 
 post '/signup' do
-  @user = User.create(name:params[:name], password:params[:password], password_confirmation:params[:password_confirmation])
+  img_url = ''
+  if params[:file]
+    img = params[:file]
+    tempfile = img[:tempfile]
+    upload = Cloudinary::Uploader.upload(tempfile.path)
+    img_url = upload['url']
+  end
+
+  @user = User.create(name: params[:name], password: params[:password], password_confirmation: params[:password_confirmation], img: img_url)
 
   if @user.persisted?
     session[:user] = @user.id
@@ -147,12 +176,55 @@ get '/' do
   end
 
 
-  @friends = Friendship.where(user_id: current_user.id)
+  #時間に合わせて各コマの暇な人を検出
+  current_time = Time.now.in_time_zone('Tokyo')
+  current_day = current_time.wday
 
+  year = current_time.year
+  month = current_time.month
+  day = current_time.day
+  weekday = ["mon", "tue", "wed", "thu", "fri"]
+
+  end_of_period1 = Time.new(year, month, day, 10, 55, 0, "+09:00")
+  end_of_period2 = Time.new(year, month, day, 12, 40, 0, "+09:00")
+  end_of_period3 = Time.new(year, month, day, 14, 30, 0, "+09:00")
+  end_of_period4 = Time.new(year, month, day, 16, 15, 0, "+09:00")
+  end_of_period5 = Time.new(year, month, day, 18, 00, 0, "+09:00")
+  end_of_period6 = Time.new(year, month, day, 19, 45, 0, "+09:00")
+
+  if current_time < end_of_period1
+    @period = 1
+  elsif current_time < end_of_period2
+    @period = 2
+  elsif current_time < end_of_period3
+    @period = 3
+  elsif current_time < end_of_period4
+    @period = 4
+  elsif current_time < end_of_period5
+    @period = 5
+  else
+    @period = 6
+  end
+
+  @friends_free_now = []
+  @friends_free_will = []
+  friended_users.each do |friend|
+    if !friend.lectures.find_by(day: weekday[current_day - 1], period: @period)
+      @friends_free_now << friend
+    end
+  end
+
+  friended_users.each do |friend|
+    if !friend.lectures.find_by(day: weekday[current_day - 1], period: @period + 1)
+      @friends_free_will << friend
+    end
+  end
 
 
 
   erb :index
+
+
 end
 
 get '/friends' do

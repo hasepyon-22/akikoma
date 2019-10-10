@@ -7,15 +7,45 @@
 <body>
 	<div class="container">
 		<div class="row">
+			<p>現在時刻</p>
+			<%= @true %>
+		</div>
 
+
+
+		<div class="row">
 
 			<div class="col-lg-6">
 				<h2>空きコマ</h2>
-					<ul>
-						<% @friends.each do |friend| %>
-							<%= friend.friend.name %>
+					<p>今現在(<%= @period%>限)授業中ではない人</p>
+					<div class="list-groups">
+						<% @friends_free_now.each do |friend| %>
+							<a href="/friends/<%= friend.id %>" class="list-group-item list-group-item-action">
+								<span class="mr-3">
+									<img class="rounded-circle" src="<%= friend.img %>" style="width: 50px">
+								</span>
+
+								<span>
+									<%= friend.name %>
+								</span>
+
+
+
+
+							</a>
 						<% end %>
+
+					</div>
+					<ul>
+
 					</ul>
+
+					<p>次のコマ(<%= @period + 1 %>限)に授業が入ってない人</p>
+						<div class="list-groups">
+							<% @friends_free_will.each do |friend| %>
+								<a href="/friends/<%= friend.id %>" class="list-group-item list-group-item-action"><%= friend.name %></a>
+							<% end %>
+						</div>
 
 			</div>
 
