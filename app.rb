@@ -4,18 +4,15 @@ require 'sinatra/reloader' if development?
 
 require './models'
 
-# require 'nokogiri'
 require 'open-uri'
 require 'csv'
 require "pp"
 require 'kconv'
 require 'net/http'
-# require 'pry'
+
 
 require 'date'
 
-# require 'dotenv'
-# require 'cloudinary'
 
 
 enable :sessions
@@ -261,7 +258,7 @@ end
 
 
 get '/search' do
-  @user = User.find_by(name: session[:result])
+  @users = User.where("name LIKE ?", "%#{session[:result]}%")
   erb :search
 end
 

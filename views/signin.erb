@@ -1,13 +1,33 @@
 <div class="container">
-  <div class="row justify-content-center">
-    <form action="/signin" method="post" class="w-50">
-      <input class="form-control" type="text" name="name" placeholder="username"><br>
-      <input class="form-control" type="password" name="password" placeholder="password"><br>
+  <div class="border" style="margin-top: 150px">
+    <div class="row justify-content-center pt-5">
+      <img src="/assets/brand-logos/logo-cropped.jpg" width="280" class="mr-4">
+    </div>
 
-      <button type="submit" class="btn btn-success btn-block">ログイン</button>
-    </form>
+    <div class="row justify-content-center">
+      <p class="mt-2">- SFC生のための空きコママッチング -</p>
+    </div>
+
+    <div class="row justify-content-center">
+
+        <form action="/signin" method="post" class="text-center p-5">
+          <input class="form-control" type="text" name="name" placeholder="username">
+          <input class="form-control mt-3" type="password" name="password" placeholder="password">
+
+          <button type="submit" class="btn btn-success btn-block mt-4 mb-3">ログイン</button>
+        </form>
+
+
+    </div>
+
+    <div class="row justify-content-center">
+      <div class="w-50">
+        <a href="/signup" class="float-right mb-3">新規登録</a>
+      </div>
+    </div>
 
   </div>
+
 
 
 
