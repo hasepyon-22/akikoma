@@ -1,21 +1,44 @@
 <div class="container">
 
-  <h1>友達</h1>
+  <h1>フレンド</h1>
+  <h3>フレンドリクエスト</h3>
+  <ul class="list-group">
+      <% @requested_friends.each do |friend| %>
+        <li class="list-group-item">
+          <div class="d-inline">
+            <span class="mr-3">
+              <img class="rounded-circle" src="<%= friend.img %>" style="width: 50px; height: 50px; object-fit: cover">
+            </span>
+
+            <span><%= friend.name %></span>
+          </div>
+
+          <div class="d-inline">
+            <span class="float-right">
+              <form action="/add/<%= friend.id %>" method="post">
+                <button type="submit" class="btn btn-info float-right">承認</button>
+              </form>
+            </span>
+
+          </div>
+        </li>
+
+      <% end %>
+  </ul>
 
 
 
-
-
+  <h3>フレンド</h3>
   <div class="list-groups">
       <% @friends.each do |friend| %>
 
-        <a href="/friends/<%= friend.friend.id %>" class="list-group-item list-group-item-action">
+        <a href="/friends/<%= friend.id %>" class="list-group-item list-group-item-action">
           <span class="mr-3">
-              <img class="rounded-circle" src="<%= friend.friend.img %>" style="width: 50px; height: 50px; object-fit: cover">
+              <img class="rounded-circle" src="<%= friend.img %>" style="width: 50px; height: 50px; object-fit: cover">
 					</span>
 
           <span>
-             <%= friend.friend.name %>
+             <%= friend.name %>
           </span>
        </a>
 

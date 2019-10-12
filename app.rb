@@ -13,6 +13,8 @@ require 'net/http'
 
 require 'date'
 
+require 'pry'
+
 
 
 enable :sessions
@@ -78,12 +80,44 @@ before do
   if !current_user && request.path_info != "/signin" && request.path_info != "/signup"
     redirect '/signin'
   end
+
+  if current_user
+    requested_friends = []
+    friendships = Friendship.where(friend_id: current_user.id)
+    friendships.each do |friendship|
+      if !Friendship.find_by(user_id: current_user.id, friend_id: friendship.user.id)
+        #申請をくれた友達を取得
+        requested_friends << friendship
+      end
+    end
+      @number_of_requests = requested_friends.length
+  end
 end
 
 
 
 
 get '/register' do
+  #時間割を取得
+  users = UsersLecture.where(user_id: current_user.id)
+
+  weekday = ["mon", "tue", "wed", "thu", "fri"]
+
+  users.each do |user|
+    for num in 0..4
+      if user.lecture.day == weekday[num]
+        for i in 1..6
+          if user.lecture.period == i
+            timing = weekday[num] + i.to_s
+            instance_variable_set("@#{timing}", user.lecture)
+
+          end
+        end
+      end
+    end
+
+  end
+
   erb :register
 end
 
@@ -225,12 +259,32 @@ get '/' do
 end
 
 get '/friends' do
-  @friends = Friendship.where(user_id: current_user.id)
+  @requested_friends = []
+  @friends = []
+  friendships = Friendship.where(friend_id: current_user.id)
+  friendships.each do |friendship|
+    if !Friendship.find_by(user_id: current_user.id, friend_id: friendship.user.id)
+      #申請をくれた友達を取得
+      @requested_friends << friendship.user
+    else
+      #両側が申請済みな友達を取得
+      @friends << friendship.user
+    end
+  end
 
   erb :friends
 end
 
 get '/friends/:id' do
+  @friends = []
+  friendships = Friendship.where(user_id: params[:id])
+  friendships.each do |friendship|
+    if Friendship.find_by(user_id: friendship.friend.id, friend_id: params[:id])
+      @friends << friendship.friend
+    end
+  end
+
+  #時間割を取得
   users = UsersLecture.where(user_id: params[:id])
 
   weekday = ["mon", "tue", "wed", "thu", "fri"]
@@ -297,3 +351,21 @@ get '/mypage' do
 
   erb :mypage
 end
+
+# get '/edit' do
+
+#   erb :edit
+# end
+
+# post '/edit' do
+
+#   img_url = ''
+#   if params[:file]
+#     img = params[:file]
+#     tempfile = img[:tempfile]
+#     upload = Cloudinary::Uploader.upload(tempfile.path)
+#     img_url = upload['url']
+#   end
+
+
+# end

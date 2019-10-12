@@ -1,9 +1,33 @@
 <div class="container">
-  <form action="/signup" method="post" enctype="multipart/form-data">
-    <input class="form-control" type="text" name="name" placeholder="username"><br>
-    <input class="form-control" type="password" name="password" placeholder="password"><br>
-    <input class="form-control" type="password" name="password_confirmation" placeholder="password"><br>
-    <input class="form-control-file" type="file" name="file"><br>
-    <button type="submit" class="btn btn-success btn-block">新規登録</button>
-  </form>
+
+  <div class="border" style="margin-top: 150px">
+      <div class="row justify-content-center pt-5">
+        <img src="/assets/brand-logos/logo-cropped.jpg" width="280" class="mr-4">
+      </div>
+
+      <div class="row justify-content-center">
+        <p class="mt-2">- SFC生のための空きコママッチング -</p>
+      </div>
+
+      <div class="row justify-content-center">
+
+          <form action="/signup" method="post" enctype="multipart/form-data">
+            <input class="form-control mt-3" type="text" name="name" placeholder="ユーザーネーム">
+            <input class="form-control mt-3" type="password" name="password" placeholder="パスワード">
+            <input class="form-control mt-3 mb-3" type="password" name="password_confirmation" placeholder="パスワードの確認">
+            <label for="file">プロフィール画像</label>
+            <input class="form-control-file" type="file" name="file" id="file">
+            <button type="submit" class="btn btn-success btn-block mt-3">新規登録</button>
+          </form>
+
+
+      </div>
+
+      <div class="row justify-content-center">
+        <div class="w-50">
+          <a href="/signin" class="float-right mb-3">ログイン</a>
+        </div>
+      </div>
+
+  </div>
 </div>

@@ -3,12 +3,19 @@
 		<img class="rounded-circle" src="<%= current_user.img %>" style="width: 150px; height: 150px; object-fit: cover">
 	</div>
 
+	<%# <div class="row justify-content-center">
+		<a href="/edit">プロフィール画像を変更</a></<a>
+	</div> %>
+
 	<div class="row justify-content-center mt-4 border-bottom">
 		<h2><%= current_user.name %></h2>
+
 	</div>
 
+
+
 	<div class="row justify-content-center mt-5">
-		<table>
+		<table class="table-bordered">
 			<tr>
 				<th></th>
 				<th>Mon</th>
@@ -78,7 +85,10 @@
 
 	</div>
 
-    <a href="/register">編集</a>
+	<div class="row justify-content-center mt-3">
+		<button type="button" onclick="location.href='/register'" class="btn btn-outline-success">時間割を編集</button>
+	</div>
+
 
 
 
