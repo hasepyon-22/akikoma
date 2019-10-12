@@ -164,7 +164,11 @@ post '/signup' do
     session[:user] = @user.id
     redirect '/register'
 
+  else
+    redirect '/signup'
   end
+
+
 end
 
 get '/signin' do
