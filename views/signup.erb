@@ -1,8 +1,11 @@
 <div class="container">
 
-  <div class="border" style="margin-top: 150px">
-      <div class="row justify-content-center pt-5">
-        <img src="/assets/brand-logos/logo-cropped.jpg" width="280" class="mr-4">
+  <div class="border mb-5" style="margin-top: 100px">
+      <div class="row justify-content-center pt-5 mr-4">
+        <div class="col-8 col-lg-4">
+          <img src="/assets/brand-logos/logo-cropped.jpg" class="img-fluid">
+        </div>
+
       </div>
 
       <div class="row justify-content-center">
@@ -11,11 +14,16 @@
 
       <div class="row justify-content-center">
 
-          <form action="/signup" method="post" enctype="multipart/form-data">
-            <input class="form-control mt-3" type="text" name="name" placeholder="ユーザーネーム">
-            <input class="form-control mt-3" type="password" name="password" placeholder="パスワード">
-            <input class="form-control mt-3 mb-3" type="password" name="password_confirmation" placeholder="パスワードの確認">
-            <label for="file">プロフィール画像</label>
+          <form action="/signup" method="post" enctype="multipart/form-data" class="col-8 col-lg-4">
+            <input class="form-control mt-3" type="text" name="name" placeholder="ユーザーネーム" required>
+
+            <input class="form-control mt-3" type="password" name="password" placeholder="パスワード" required>
+
+            <input class="form-control mt-3 mb-3" type="password" name="password_confirmation" placeholder="パスワードの確認" required>
+            <span class="form-text text-muted">
+              パスワードは5文字以上10文字以内である必要があります
+            </span>
+            <label for="file" class="mt-3">プロフィール画像</label>
             <input class="form-control-file" type="file" name="file" id="file">
             <button type="submit" class="btn btn-success btn-block mt-3">新規登録</button>
           </form>
@@ -23,9 +31,9 @@
 
       </div>
 
-      <div class="row justify-content-center">
-        <div class="w-50">
-          <a href="/signin" class="float-right mb-3">ログイン</a>
+      <div class="row justify-content-center pb-5">
+        <div class="col-8 col-lg-4">
+          <a href="/signin" class="float-right">ログイン</a>
         </div>
       </div>
 

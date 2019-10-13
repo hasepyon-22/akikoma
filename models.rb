@@ -9,7 +9,8 @@ class User < ActiveRecord::Base
   has_secure_password
   validates :name,
     presence: true,
-    uniqueness: true
+    uniqueness: true,
+    format: {with: /\A[a-z]+\z/}
   validates :password,
     length: {in: 5..10}
 

@@ -1,7 +1,13 @@
 <div class="container">
   <div class="border" style="margin-top: 150px">
     <div class="row justify-content-center pt-5">
-      <img src="/assets/brand-logos/logo-cropped.jpg" width="280" class="mr-4">
+      <%# <img src="/assets/brand-logos/logo-cropped.jpg" width="280" class="mr-4
+      img-fluid"> %>
+      <div class="col-8 col-lg-4 mr-4">
+        <img src="/assets/brand-logos/logo-cropped.jpg" class="img-fluid">
+      </div>
+
+
     </div>
 
     <div class="row justify-content-center">
@@ -10,7 +16,7 @@
 
     <div class="row justify-content-center">
 
-        <form action="/signin" method="post">
+        <form action="/signin" method="post" class="col-8 col-lg-4">
           <input class="form-control" type="text" name="name" placeholder="ユーザーネーム">
           <input class="form-control mt-3" type="password" name="password" placeholder="パスワード">
 
@@ -21,7 +27,7 @@
     </div>
 
     <div class="row justify-content-center">
-      <div class="w-50">
+      <div class="col-8 col-lg-4">
         <a href="/signup" class="float-right mb-3">新規登録</a>
       </div>
     </div>

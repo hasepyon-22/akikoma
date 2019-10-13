@@ -321,13 +321,14 @@ end
 
 
 get '/search' do
-  @users = User.where("name LIKE ?", "%#{session[:result]}%")
+  @users = []
   erb :search
 end
 
 post '/search' do
-  session[:result] = params[:name]
-  redirect back
+  # session[:result] = params[:name]
+  @users = User.where("name LIKE ?", "%#{params[:name]}%")
+  erb :search
 end
 
 post '/add/:id' do
