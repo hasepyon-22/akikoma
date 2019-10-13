@@ -159,6 +159,8 @@ post '/signup' do
         {:width => 500, :height => 500, :crop => :fit}
       ])
     img_url = upload['eager'][0]['url']
+  else
+    img_url = '/assets/brand-logos/default.png'
   end
 
   @user = User.create(name: params[:name], password: params[:password], password_confirmation: params[:password_confirmation], img: img_url)
