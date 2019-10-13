@@ -154,8 +154,11 @@ post '/signup' do
   if params[:file]
     img = params[:file]
     tempfile = img[:tempfile]
-    upload = Cloudinary::Uploader.upload(tempfile.path)
-    img_url = upload['url']
+    upload = Cloudinary::Uploader.upload(tempfile.path,
+      :eager => [
+        {:width => 500, :height => 500, :crop => :fit}
+      ])
+    img_url = upload['eager'][0]['url']
   end
 
   @user = User.create(name: params[:name], password: params[:password], password_confirmation: params[:password_confirmation], img: img_url)
